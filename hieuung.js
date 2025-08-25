@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function runAnimation() {
     if (!logoWrap || !badge || !banner) return;
     const { dx, dy, scale } = getDelta();
-    const tl = gsap.timeline({ delay: 1 });
+    const tl = gsap.timeline({ delay: 0.5 });
     tl.to(logoWrap, { x: dx, y: dy, scale: scale, duration: 1.5, ease: "power2.inOut" }, 0)
       .to(badge, { opacity: 1, duration: 1, ease: "power2.inOut" }, 0.2)
       .to(banner, { opacity: 1, duration: 1.2, ease: "power2.inOut" }, 0.5)
@@ -154,5 +154,6 @@ document.addEventListener('DOMContentLoaded', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 });
+
 
 
