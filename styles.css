@@ -936,11 +936,19 @@ header.brand-badge .mini {
   background: linear-gradient(135deg, #0056b3, #0088cc);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
-
+/* Chỉ cho iPhone / iOS thêm khoảng safe area */
+@supports(padding: max(0px)) {
+  @media (orientation: portrait) and (min-width: 320px) and (max-width: 812px) {
+    #btnTop {
+      bottom: calc(30px + env(safe-area-inset-bottom));
+    }
+  }
+}
 #btnTop svg {
   width: 24px;
   height: 24px;
 }
+
 
 
 
