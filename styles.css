@@ -941,13 +941,17 @@ header.brand-badge .mini {
   @media (orientation: portrait) and (min-width: 320px) and (max-width: 812px) {
     #btnTop {
       bottom: calc(30px + env(safe-area-inset-bottom));
+    
     }
+    
   }
 }
 #btnTop svg {
   width: 24px;
   height: 24px;
+  margin:0px;
 }
+
 
 
 
