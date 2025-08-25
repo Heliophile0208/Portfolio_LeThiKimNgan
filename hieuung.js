@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // 1. Scroll animation thuần
   const hero = document.querySelector('.hero');
   const cards = document.querySelectorAll('.grid .card');
@@ -8,20 +8,20 @@ document.addEventListener('DOMContentLoaded', function() {
   function revealOnScroll() {
     const windowHeight = window.innerHeight;
 
-    if(hero && hero.getBoundingClientRect().top < windowHeight - 100){
+    if (hero && hero.getBoundingClientRect().top < windowHeight - 100) {
       hero.classList.add('active');
     }
 
     cards.forEach((card, index) => {
-      if(card.getBoundingClientRect().top < windowHeight - 50){
+      if (card.getBoundingClientRect().top < windowHeight - 50) {
         setTimeout(() => card.classList.add('active'), index * 150);
       }
     });
 
-    if(statsLeft && statsLeft.getBoundingClientRect().top < windowHeight - 100){
+    if (statsLeft && statsLeft.getBoundingClientRect().top < windowHeight - 100) {
       statsLeft.classList.add('active');
     }
-    if(statsRight && statsRight.getBoundingClientRect().top < windowHeight - 100){
+    if (statsRight && statsRight.getBoundingClientRect().top < windowHeight - 100) {
       statsRight.classList.add('active');
     }
   }
@@ -39,91 +39,106 @@ document.addEventListener('DOMContentLoaded', function() {
   function getDelta() {
     const from = logoWrap.getBoundingClientRect();
     const to = badge.getBoundingClientRect();
-    const fromCenter = { x: from.left + from.width/2, y: from.top + from.height/2 };
-    const toCenter = { x: to.left + to.width/2, y: to.top + to.height/2 };
+    const fromCenter = { x: from.left + from.width / 2, y: from.top + from.height / 2 };
+    const toCenter = { x: to.left + to.width / 2, y: to.top + to.height / 2 };
     const dx = toCenter.x - fromCenter.x;
     const dy = toCenter.y - fromCenter.y;
-    const scale = (to.width*0.7)/from.width;
+    const scale = (to.width * 0.7) / from.width;
     return { dx, dy, scale };
   }
 
   gsap.set(logoWrap, { transformOrigin: "50% 50%" });
 
   function runAnimation() {
-    if(!logoWrap || !badge || !banner) return;
+    if (!logoWrap || !badge || !banner) return;
     const { dx, dy, scale } = getDelta();
     const tl = gsap.timeline({ delay: 2 });
     tl.to(logoWrap, { x: dx, y: dy, scale: scale, duration: 1.5, ease: "power2.inOut" }, 0)
-      .to(badge, { opacity:1, duration:1, ease:"power2.inOut"}, 0.2)
-      .to(banner, {opacity:1, duration:1.2, ease:"power2.inOut"},0.5)
-      .to(".scroll-hint",{opacity:1,duration:1},">")
-      .to(logoWrap,{opacity:0,duration:0.5,ease:"power1.inOut"},">");
+      .to(badge, { opacity: 1, duration: 1, ease: "power2.inOut" }, 0.2)
+      .to(banner, { opacity: 1, duration: 1.2, ease: "power2.inOut" }, 0.5)
+      .to(".scroll-hint", { opacity: 1, duration: 1 }, ">")
+      .to(logoWrap, { opacity: 0, duration: 0.5, ease: "power1.inOut" }, ">");
   }
   window.addEventListener("load", runAnimation);
 
-  gsap.fromTo('.site',{opacity:0},{opacity:1,ease:'none',
-    scrollTrigger:{trigger:intro,start:'top top',end:'+=120%',scrub:true}
+  gsap.fromTo('.site', { opacity: 0 }, {
+    opacity: 1, ease: 'none',
+    scrollTrigger: { trigger: intro, start: 'top top', end: '+=120%', scrub: true }
   });
 
-  // 3. IntersectionObserver cho stat-card
+  // youtube
   const stats = document.querySelectorAll('.stat-card');
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
         entry.target.classList.add('visible');
       }
     });
-  }, { threshold:0.2 });
+  }, { threshold: 0.2 });
 
   stats.forEach(stat => observer.observe(stat));
   // bo cong thuong
   const productImages = document.querySelector('.product-images');
-const productDescription = document.querySelector('.product-description-new');
+  const productDescription = document.querySelector('.product-description-new');
 
-function revealProductSection() {
-  const windowHeight = window.innerHeight;
-  const sectionTop = productImages.getBoundingClientRect().top;
+  function revealProductSection() {
+    const windowHeight = window.innerHeight;
+    const sectionTop = productImages.getBoundingClientRect().top;
 
-  if(sectionTop < windowHeight - 100){
-    productImages.classList.add('active');
-    productDescription.classList.add('active');
+    if (sectionTop < windowHeight - 100) {
+      productImages.classList.add('active');
+      productDescription.classList.add('active');
+    }
   }
-}
 
-window.addEventListener('scroll', revealProductSection);
-revealProductSection(); // kiểm tra khi load
-//sp
-// Chỉ áp dụng cho section demo sản phẩm
-const demoElements = document.querySelectorAll('.demo-slide-left, .demo-slide-right');
+  window.addEventListener('scroll', revealProductSection);
+  revealProductSection();
+  //sp
+  const demoElements = document.querySelectorAll('.demo-slide-left, .demo-slide-right');
 
-function revealDemoOnScroll() {
-  const windowHeight = window.innerHeight;
+  function revealDemoOnScroll() {
+    const windowHeight = window.innerHeight;
 
-  demoElements.forEach(el => {
-    const elementTop = el.getBoundingClientRect().top;
-    if (elementTop < windowHeight - 100) {
-      el.classList.add('active');
-    }
-  });
-}
+    demoElements.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 100) {
+        el.classList.add('active');
+      }
+    });
+  }
 
-window.addEventListener('scroll', revealDemoOnScroll);
-window.addEventListener('load', revealDemoOnScroll);
-// contact
-const slideUpElements = document.querySelectorAll('.slide-up');
+  window.addEventListener('scroll', revealDemoOnScroll);
+  window.addEventListener('load', revealDemoOnScroll);
+  // contact
+  const slideUpElements = document.querySelectorAll('.slide-up');
 
-function revealSlideUp() {
-  const windowHeight = window.innerHeight;
+  function revealSlideUp() {
+    const windowHeight = window.innerHeight;
 
-  slideUpElements.forEach(el => {
-    const elementTop = el.getBoundingClientRect().top;
-    if (elementTop < windowHeight - 100) {
-      el.classList.add('active');
-    }
-  });
-}
+    slideUpElements.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 100) {
+        el.classList.add('active');
+      }
+    });
+  }
 
-window.addEventListener('scroll', revealSlideUp);
-window.addEventListener('load', revealSlideUp);
+  window.addEventListener('scroll', revealSlideUp);
+  window.addEventListener('load', revealSlideUp);
+  // Section SEO
+  const seoBoxes = document.querySelectorAll('.seo-box');
+
+  function revealSeoOnScroll() {
+    const windowHeight = window.innerHeight;
+    seoBoxes.forEach((box, index) => {
+      const boxTop = box.getBoundingClientRect().top;
+      if (boxTop < windowHeight - 100) {
+        setTimeout(() => box.classList.add('active'), index * 200);
+      }
+    });
+  }
+
+  window.addEventListener('scroll', revealSeoOnScroll);
+  window.addEventListener('load', revealSeoOnScroll);
 
 });
