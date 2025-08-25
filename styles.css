@@ -936,6 +936,18 @@ header.brand-badge .mini {
 #btnTop i {
   display: inline-block;
 }
+@media screen and (max-width: 767px) {
+  #btnTop {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #btnTop {
+    display: block;
+  }
+}
+
 
 
 
