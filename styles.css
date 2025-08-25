@@ -933,14 +933,12 @@ header.brand-badge .mini {
   background: linear-gradient(135deg, #0056b3, #0088cc);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
-#btnTop i {
-  display: inline-block;
-}
 @media screen and (max-width: 767px) {
   #btnTop {
     display: none !important;
   }
 }
+
 
 
 
