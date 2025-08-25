@@ -942,11 +942,6 @@ header.brand-badge .mini {
   }
 }
 
-@media screen and (min-width: 768px) {
-  #btnTop {
-    display: block;
-  }
-}
 
 
 
